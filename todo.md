@@ -29,3 +29,16 @@
 
 - [x] Exercise a guardrail control that causes a visible decision or evidence change and document the updated verdict/check explanation.
 - [x] Start with simulation ON, toggle OFF and verify LIVE REVIEW/no preview, then toggle ON and verify SIMULATION/no-funds-moved preview; update QA.md with both transitions.
+
+- [x] Redesign the Sentinel visual system to feel premium and intentional rather than generic AI dashboard UI.
+- [x] Refine landing-page hierarchy, typography, spacing, hero composition, and signature preflight brand motif.
+- [x] Reduce dashboard-card repetition and improve workspace density, section rhythm, and decision emphasis.
+- [x] Add polished hover, focus, active, and transition states while preserving accessibility and reduced-motion behavior.
+- [x] Re-verify desktop/mobile screenshots and core interactions after the visual redesign.
+- [x] Save a new redesign checkpoint after all premium UI items are complete.
+
+- [x] Introduce a distinctive Sentinel audit-trail motif across hero, workspace, method, and trust sections.
+- [x] Add stronger page-level compositional contrast and reduce repeated rounded-card treatment.
+- [ ] Strengthen typography hierarchy and branded section treatments until the visual review supports a premium result.
+- [ ] Capture a fresh trusted visual review after the second premium pass.
+- [ ] Save a post-redesign checkpoint after the second pass is verified and the trusted visual review is clean.
