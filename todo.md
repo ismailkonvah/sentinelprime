@@ -39,6 +39,11 @@
 
 - [x] Introduce a distinctive Sentinel audit-trail motif across hero, workspace, method, and trust sections.
 - [x] Add stronger page-level compositional contrast and reduce repeated rounded-card treatment.
-- [ ] Strengthen typography hierarchy and branded section treatments until the visual review supports a premium result.
-- [ ] Capture a fresh trusted visual review after the second premium pass.
-- [ ] Save a post-redesign checkpoint after the second pass is verified and the trusted visual review is clean.
+- [x] Strengthen typography hierarchy and branded section treatments until the visual review supports a premium result.
+- [x] Capture a fresh trusted visual review after the second premium pass.
+- [x] Save a post-redesign checkpoint after the second pass is verified and the trusted visual review is clean.
+
+- [ ] Add procedural audit-trace structure directly to the method and trust sections, not only through background decoration.
+- [ ] Increase non-hero typography contrast with stronger narrative statements and clearer procedural labels.
+- [ ] Capture a clean trusted visual review after the final brand-system pass.
+- [ ] Save the final premium UI checkpoint after trusted visual approval.
