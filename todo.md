@@ -14,7 +14,7 @@
 - [x] Add copy-to-clipboard and plain-text export from decision cards and the audit report view.
 - [x] Add unit tests for policy parsing, every risk preflight check, verdict aggregation, guardrail updates, simulation labeling, and report generation.
 - [x] Verify desktop and mobile layouts, browser console, network behavior, and core interaction flows.
-- [ ] Save final checkpoint after all TODO items are complete.
+- [x] Save final checkpoint after all TODO items are complete.
 
 - [x] Rank Orion agents by evaluated policy fit and expose audit status, uptime, TVL, historical volatility, liquidity, and intelligence score in the comparison panel.
 - [x] Pass the live intent and evaluated agent score into the exported audit report.
