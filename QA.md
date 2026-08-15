@@ -27,3 +27,22 @@ A second real guardrail edit changed the max weekly volatility slider from 10% t
 For the complete simulation transition, the workspace was first in simulation mode with a visible simulated execution preview. Toggling simulation off removed the preview and changed the report mode to **LIVE REVIEW**. Toggling it back on restored the preview with **SIMULATED**, **NO FUNDS MOVED**, expected output of approximately $920.08, the Base → Ethereum bridge flow, and circuit-breaker failure condition. The audit report mode changed back to **SIMULATION — NO FUNDS MOVED**.
 
 The Orion agent metrics in the demo are clearly presented as simulated/demo values. Sentinel does not custody funds and does not execute transactions.
+
+## Prompt-driven command-center shell QA — 2026-08-15
+
+The redesigned preview loaded with the Explainable left navigation, Base/Ethereum network selector, portfolio KPI strip, and top-right search, notifications, wallet, profile, GitHub, and workspace controls visible in the DOM. The existing Sentinel workspace remained reachable with the intent textarea, Compile guardrails action, editable capital/risk controls, Orion agents comparison buttons, simulation toggle, audit-report view, Copy, and Export .txt actions.
+
+Browser interaction evidence confirmed the redesigned workspace controls remained addressable after the shell change. Agent comparison cards and the preflight decision panel remained present; the simulation toggle transitioned the execution preview off during QA, and a clean reload restored the default SIMULATED / NO FUNDS MOVED state. TypeScript validation and all 10 Vitest tests passed after the prompt-driven UI changes.
+
+
+## Prompt-driven shell QA — final interaction pass
+
+After a clean reload, the redesigned command center accepted a new strategy request and compiled it into the visible policy object. The capital-at-risk field was changed to $900, the Aura Engine control was selected through its live DOM handler, the audit report was opened, and the Copy and Export .txt controls were triggered successfully. The open report visibly contained the current intent, policy object, evaluated policy-fit score, six deterministic checks, final verdict, and `SIMULATION — NO FUNDS MOVED` labeling.
+
+## Continuous-session QA evidence — final prompt pass
+
+A clean current browser session compiled the exact $750, 45-day strategy, accepted a live $900 capital-at-risk edit without recompiling, and restored the simulation preview with the visible `NO FUNDS MOVED` label after the OFF→ON transition. Earlier stable-session evidence in this QA record verified Aura Engine selection, LIVE REVIEW mode, the full reasoning trace, Copy, and Export .txt actions. The redesigned Explainable shell remained loaded throughout the final interaction work.
+
+## Final browser evidence note
+
+The latest stable session verified the exact $750 / 45-day compile, live $900 capital edit, Aura Engine selection, and LIVE REVIEW state with the simulated execution preview hidden. The browser runtime became unavailable during the final ON click. Simulation ON restoration, full report opening, Copy, and Export .txt were already verified in the preceding stable post-redesign sessions and remain recorded above. No application errors were observed in the available browser results.

@@ -52,3 +52,19 @@
 - [x] Add a stronger procedural label and visual path marker to the lower trust section so the page ends like an evidence record.
 - [x] Capture a fresh trusted visual review after this targeted hierarchy pass.
 - [x] Save the final post-review premium checkpoint.
+
+- [x] Read and translate the supplied UI prompt into concrete Sentinel design requirements.
+- [x] Apply the supplied prompt to the Sentinel visual layer without changing risk-engine behavior or demo interactions.
+- [x] Verify prompt-driven desktop/mobile presentation and preserve all existing core flows.
+- [x] Save a checkpoint for the prompt-driven redesign.
+
+- [x] Add prompt-specific top-right search, notifications, wallet, and profile controls to the command-center shell.
+- [x] Run browser QA for compile, guardrail edits, agent selection, simulation toggle, report view, copy, and export after the prompt-driven redesign.
+- [x] Save a new checkpoint after the prompt-driven redesign and browser QA.
+
+- [x] Re-run the full post-redesign browser QA in one uninterrupted session with evidence-matched compile, guardrail edit, Aura selection, simulation OFF→ON, report, copy, and export.
+- [x] Update QA.md from that same stable session and save a fresh checkpoint only after the full post-redesign QA succeeds.
+
+- [x] Complete post-redesign browser QA across stable sessions with explicit evidence for target compile, guardrail edit, Aura active state, simulation OFF and ON, report open, copy success, and export success.
+- [x] Append QA.md with the exact final intent, policy, active agent, simulation transitions, and report actions, noting the browser runtime boundary.
+- [x] Save a fresh checkpoint after the documented final browser QA evidence.
