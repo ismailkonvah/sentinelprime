@@ -110,3 +110,8 @@
 - [x] Re-run responsive browser QA at mobile and desktop sizes for search, notifications, profile, workspace navigation, handoff, and audit report flows, including focus-state checks.
 - [x] Add focused responsive contract tests rather than relying only on the existing business-logic suite.
 - [x] Save a fresh checkpoint after responsive QA and responsive contract coverage.
+
+- [ ] Diagnose the Vercel deployment output and identify the runtime or configuration failure.
+- [ ] Apply or document the safest Vercel-compatible correction and required environment variables.
+- [ ] Validate the correction locally and against the deployed URL where possible.
+- [ ] Push any deployment fix to GitHub and save a recoverable checkpoint.
