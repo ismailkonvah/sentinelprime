@@ -48,7 +48,7 @@
 - [x] Capture a clean trusted visual review after the final brand-system pass.
 - [x] Save the final premium UI checkpoint after trusted visual approval.
 
-- [ ] Make the method section’s primary statement more editorial and signature-led, with a clear pre-signature action phrase.
-- [ ] Add a stronger procedural label and visual path marker to the lower trust section so the page ends like an evidence record.
-- [ ] Capture a fresh trusted visual review after this targeted hierarchy pass.
-- [ ] Save the final post-review premium checkpoint.
+- [x] Make the method section’s primary statement more editorial and signature-led, with a clear pre-signature action phrase.
+- [x] Add a stronger procedural label and visual path marker to the lower trust section so the page ends like an evidence record.
+- [x] Capture a fresh trusted visual review after this targeted hierarchy pass.
+- [x] Save the final post-review premium checkpoint.
