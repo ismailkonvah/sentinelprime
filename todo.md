@@ -43,7 +43,12 @@
 - [x] Capture a fresh trusted visual review after the second premium pass.
 - [x] Save a post-redesign checkpoint after the second pass is verified and the trusted visual review is clean.
 
-- [ ] Add procedural audit-trace structure directly to the method and trust sections, not only through background decoration.
-- [ ] Increase non-hero typography contrast with stronger narrative statements and clearer procedural labels.
-- [ ] Capture a clean trusted visual review after the final brand-system pass.
-- [ ] Save the final premium UI checkpoint after trusted visual approval.
+- [x] Add procedural audit-trace structure directly to the method and trust sections, not only through background decoration.
+- [x] Increase non-hero typography contrast with stronger narrative statements and clearer procedural labels.
+- [x] Capture a clean trusted visual review after the final brand-system pass.
+- [x] Save the final premium UI checkpoint after trusted visual approval.
+
+- [ ] Make the method section’s primary statement more editorial and signature-led, with a clear pre-signature action phrase.
+- [ ] Add a stronger procedural label and visual path marker to the lower trust section so the page ends like an evidence record.
+- [ ] Capture a fresh trusted visual review after this targeted hierarchy pass.
+- [ ] Save the final post-review premium checkpoint.
