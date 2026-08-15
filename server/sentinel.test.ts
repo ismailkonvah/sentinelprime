@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildReport, defaultPolicy, evaluateAgent, orionAgents, parseIntent, rankAgents } from "../client/src/lib/sentinel";
+import { buildReport, defaultPolicy, derivePortfolioSnapshot, evaluateAgent, orionAgents, parseIntent, rankAgents } from "../client/src/lib/sentinel";
 
 describe("Sentinel intent compiler", () => {
   it("parses amount, duration, volatility, bridges, and low-risk audit requirements", () => {
@@ -68,6 +68,19 @@ describe("Sentinel deterministic preflight", () => {
   });
 });
 
+describe("Sentinel dashboard data", () => {
+  it("derives dynamic portfolio KPIs from the active policy and Orion agents", () => {
+    const baseline = derivePortfolioSnapshot(defaultPolicy, orionAgents[0]);
+    const larger = derivePortfolioSnapshot({ ...defaultPolicy, amount: 900 }, orionAgents[0]);
+    const blocked = derivePortfolioSnapshot({ ...defaultPolicy, maxBridges: 0 }, orionAgents[0]);
+    expect(larger.portfolioValue).toBeGreaterThan(baseline.portfolioValue);
+    expect(baseline.totalTvl).toBeCloseTo(24.4, 1);
+    expect(baseline.averageUptime).toBeGreaterThan(98);
+    expect(blocked.eligibleAgents).toBeLessThanOrEqual(baseline.eligibleAgents);
+    expect(blocked.riskLabel).toBe("High");
+  });
+});
+
 describe("Sentinel audit reports", () => {
   it("uses the live intent and evaluated score and labels reports as simulation", () => {
     const evaluation = evaluateAgent(orionAgents[0], defaultPolicy);
@@ -78,5 +91,71 @@ describe("Sentinel audit reports", () => {
     expect(report).toContain("POLICY OBJECT");
     expect(report).toContain("PREFLIGHT CHECKS");
     expect(report).toContain("RECOMMENDATION");
+  });
+});
+
+
+describe("Sentinel command-center controls", () => {
+  it("returns searchable workspace and agent records with case-insensitive filtering", async () => {
+    const { getSearchResults } = await import("../client/src/lib/sentinel");
+    expect(getSearchResults("aura").map((item) => item.label)).toEqual(["Aura Engine"]);
+    expect(getSearchResults("").map((item) => item.label)).toContain("Audit report");
+  });
+
+  it("models notification unread to read transitions", async () => {
+    const { getNotificationState } = await import("../client/src/lib/sentinel");
+    expect(getNotificationState(false, 4)).toMatchObject({ unread: true, label: "2 new", summary: "4/6 checks currently passing." });
+    expect(getNotificationState(true, 6)).toMatchObject({ unread: false, label: "All read" });
+  });
+
+  it("keeps handoff simulation-only and blocks confirmation after a failed preflight", async () => {
+    const { getHandoffState } = await import("../client/src/lib/sentinel");
+    expect(getHandoffState("approve")).toMatchObject({ canConfirm: true, isSimulationOnly: true });
+    expect(getHandoffState("blocked")).toMatchObject({ canConfirm: false, label: "Blocked by preflight", isSimulationOnly: true });
+  });
+
+  it("exposes provenance metadata on dynamic portfolio snapshots", () => {
+    const snapshot = derivePortfolioSnapshot(defaultPolicy, orionAgents[0]);
+    expect(snapshot).toMatchObject({ dataSource: "Orion agents demo registry", dataFreshness: "simulated" });
+    expect(snapshot.lastUpdated).toMatch(/^2026-08-15T/);
+  });
+});
+
+
+describe("Sentinel remaining UI contracts", () => {
+  it("keeps workspace and report as distinct keyboard destinations", async () => {
+    const { getSearchResults } = await import("../client/src/lib/sentinel");
+    expect(getSearchResults("workspace")[0]).toMatchObject({ target: "workspace" });
+    expect(getSearchResults("report")[0]).toMatchObject({ label: "Audit report", target: "report" });
+  });
+
+  it("labels profile actions as safe demo-only actions", async () => {
+    const { getProfileActionState } = await import("../client/src/lib/sentinel");
+    expect(getProfileActionState("view-context", false)).toMatchObject({ safe: true, label: "Demo operator" });
+    expect(getProfileActionState("demo-sign-out", true)).toMatchObject({ safe: true, label: "Sign out of demo" });
+    expect(getProfileActionState("demo-sign-out", false).description).toContain("no wallet or funds affected");
+  });
+
+  it("builds modal evidence for warnings, simulated output, and failure conditions", async () => {
+    const { getHandoffModalState, evaluateAgent } = await import("../client/src/lib/sentinel");
+    const agent = (await import("../client/src/lib/sentinel")).orionAgents[1];
+    const policy = (await import("../client/src/lib/sentinel")).defaultPolicy;
+    const evaluation = evaluateAgent(agent, policy);
+    const modal = getHandoffModalState(agent, policy, evaluation, true);
+    expect(modal).toMatchObject({ agent: "Aura Engine", checksLabel: "4/6 passing", isSimulationOnly: true });
+    expect(modal.simulatedOutput).toMatch(/^~\$507/);
+    expect(modal.warnings.length).toBeGreaterThan(0);
+    expect(modal.failureConditions).toContain("Circuit breaker halts before signing");
+  });
+});
+
+
+describe("notification transition", () => {
+  it("moves from unread to all read after the panel is opened", async () => {
+    const { getNotificationState } = await import("../client/src/lib/sentinel");
+    const unread = getNotificationState(false, 4);
+    const read = getNotificationState(true, 4);
+    expect(unread).toMatchObject({ unread: true, label: "2 new" });
+    expect(read).toMatchObject({ unread: false, label: "All read", summary: "4/6 checks currently passing." });
   });
 });

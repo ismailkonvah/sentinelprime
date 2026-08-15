@@ -20,6 +20,8 @@ export type CheckResult = {
   evidence: string;
 };
 
+export type DataFreshness = "live" | "recent" | "simulated";
+
 export type OrionAgent = {
   id: string;
   name: string;
@@ -37,6 +39,9 @@ export type OrionAgent = {
   apy: number;
   description: string;
   flow: string[];
+  dataSource: string;
+  dataFreshness: DataFreshness;
+  lastUpdated: string;
 };
 
 export const defaultPolicy: Policy = {
@@ -69,6 +74,9 @@ export const orionAgents: OrionAgent[] = [
     apy: 12.5,
     description: "Cross-chain stablecoin yield optimizer with circuit breakers.",
     flow: ["Lock policy", "Route to audited vault", "Monitor liquidity", "Settle on Base"],
+    dataSource: "Orion agents demo registry",
+    dataFreshness: "simulated",
+    lastUpdated: "2026-08-15T06:55:00Z",
   },
   {
     id: "aura-engine",
@@ -87,6 +95,9 @@ export const orionAgents: OrionAgent[] = [
     apy: 18.1,
     description: "Adaptive delta-neutral execution agent for volatile markets.",
     flow: ["Lock policy", "Hedge exposure", "Rebalance", "Return principal"],
+    dataSource: "Orion agents demo registry",
+    dataFreshness: "simulated",
+    lastUpdated: "2026-08-15T06:55:00Z",
   },
   {
     id: "helix-yield",
@@ -105,6 +116,9 @@ export const orionAgents: OrionAgent[] = [
     apy: 22.6,
     description: "Multi-chain liquidity router seeking higher headline yield.",
     flow: ["Bridge to Optimism", "Split liquidity", "Bridge to Polygon", "Harvest"],
+    dataSource: "Orion agents demo registry",
+    dataFreshness: "simulated",
+    lastUpdated: "2026-08-15T06:55:00Z",
   },
 ];
 
@@ -153,6 +167,57 @@ export function evaluateAgent(agent: OrionAgent, policy: Policy): { verdict: Ver
 
 export function rankAgents(policy: Policy) {
   return [...orionAgents].sort((a, b) => evaluateAgent(b, policy).score - evaluateAgent(a, policy).score);
+}
+
+export function derivePortfolioSnapshot(policy: Policy, selectedAgent: OrionAgent, agents: OrionAgent[] = orionAgents) {
+  const totalTvl = agents.reduce((sum, agent) => sum + agent.tvl, 0);
+  const averageUptime = agents.reduce((sum, agent) => sum + agent.uptime, 0) / agents.length;
+  const ranked = [...agents].sort((a, b) => evaluateAgent(b, policy).score - evaluateAgent(a, policy).score);
+  const eligibleAgents = ranked.filter((agent) => evaluateAgent(agent, policy).verdict !== "blocked").length;
+  const deployed = policy.amount * Math.max(1, eligibleAgents);
+  const portfolioValue = deployed * (1 + selectedAgent.apy / 100 * policy.duration / 365);
+  const evaluation = evaluateAgent(selectedAgent, policy);
+  const riskLabel = evaluation.verdict === "approve" ? "Low" : evaluation.verdict === "warning" ? "Moderate" : "High";
+  return { totalTvl, averageUptime, eligibleAgents, deployed, portfolioValue, riskLabel, dataSource: selectedAgent.dataSource, dataFreshness: selectedAgent.dataFreshness, lastUpdated: selectedAgent.lastUpdated };
+}
+
+export type SearchResult = { label: string; target: string; agentId?: string };
+
+export function getSearchResults(query: string, agents: OrionAgent[] = orionAgents): SearchResult[] {
+  const records: SearchResult[] = [{ label: "Overview workspace", target: "workspace" }, { label: "Audit report", target: "report" }, ...agents.map((agent) => ({ label: agent.name, target: "workspace", agentId: agent.id }))];
+  const normalized = query.trim().toLowerCase();
+  return normalized ? records.filter((item) => item.label.toLowerCase().includes(normalized)) : records;
+}
+
+export function getNotificationState(read: boolean, passingChecks: number) {
+  return { label: read ? "All read" : "2 new", unread: !read, summary: `${passingChecks}/6 checks currently passing.` };
+}
+
+export function getHandoffState(verdict: Verdict) {
+  return { canConfirm: verdict !== "blocked", label: verdict === "blocked" ? "Blocked by preflight" : "Confirm simulated handoff", isSimulationOnly: true };
+}
+
+export type ProfileAction = "view-context" | "demo-sign-out";
+
+export function getProfileActionState(action: ProfileAction, authenticated: boolean) {
+  if (action === "view-context") return { label: "Demo operator", safe: true, description: "Guest demo mode · no account changes" };
+  return { label: authenticated ? "Sign out of demo" : "Demo already signed out", safe: true, description: "Demo-only session action · no wallet or funds affected" };
+}
+
+export function getHandoffModalState(agent: OrionAgent, policy: Policy, evaluation: { verdict: Verdict; checks: CheckResult[] }, simulated: boolean) {
+  const failedChecks = evaluation.checks.filter((check) => check.status === "fail");
+  const warningChecks = evaluation.checks.filter((check) => check.status === "warning");
+  return {
+    agent: agent.name,
+    policySummary: `$${policy.amount} · ${policy.duration} days · ${policy.riskTolerance} risk`,
+    verdict: verdictLabel(evaluation.verdict),
+    checksLabel: `${evaluation.checks.filter((check) => check.status === "pass").length}/${evaluation.checks.length} passing`,
+    warnings: warningChecks.map((check) => `${check.label}: ${check.actual} vs ${check.threshold}`),
+    failures: failedChecks.map((check) => `${check.label}: ${check.evidence}`),
+    simulatedOutput: simulated ? `~$${(policy.amount * (1 + agent.apy / 100 * policy.duration / 365)).toFixed(2)}` : "Live review only",
+    failureConditions: agent.flow.length ? ["Circuit breaker halts before signing", ...failedChecks.map((check) => check.label)] : ["Circuit breaker halts before signing"],
+    isSimulationOnly: true,
+  };
 }
 
 export function verdictLabel(verdict: Verdict) {

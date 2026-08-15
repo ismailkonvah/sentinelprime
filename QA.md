@@ -46,3 +46,25 @@ A clean current browser session compiled the exact $750, 45-day strategy, accept
 ## Final browser evidence note
 
 The latest stable session verified the exact $750 / 45-day compile, live $900 capital edit, Aura Engine selection, and LIVE REVIEW state with the simulated execution preview hidden. The browser runtime became unavailable during the final ON click. Simulation ON restoration, full report opening, Copy, and Export .txt were already verified in the preceding stable post-redesign sessions and remain recorded above. No application errors were observed in the available browser results.
+
+## Dynamic dashboard and interaction QA — 2026-08-15
+
+The upgraded command center rendered dynamic portfolio and Orion-agent KPIs from the shared Sentinel snapshot: simulated portfolio value $1,014.88, 3 active agents, $1,000 capital deployed, 24.4M aggregate TVL, 98.4% uptime, and 4/6 current checks passing.
+
+The command bar was exercised in the browser. Search opened its result panel, notifications opened a two-item System activity panel containing the Aura audit-review warning and the current 4/6 preflight state, and profile opened the Demo operator / Guest demo mode context. The wallet/handoff action opened the explicit Confirm simulation handoff modal.
+
+The confirmation modal showed the selected Aura Engine, $500 / 30 days / low-risk policy, Approve with Warning decision, Base → Ethereum route, and the safety boundary that no wallet connection, signature request, transaction, or custody occurs. Confirming produced the visible state `Simulation handoff prepared — no wallet signature requested` and changed the action to `Handoff prepared`.
+
+## Final gap verification — Aug 15, 2026
+
+The restarted preview rendered without the prior Home.tsx JSX error. The portfolio strip visibly shows `Data source: Orion agents demo registry`, `Freshness: Simulated`, and the timestamp. Search opened with a labeled `Workspace search` dialog and a `Search results` listbox. Typing `aura` filtered to `Aura Engine`; pressing Enter closed the overlay, scrolled to the workspace, and updated the selected preflight decision to Aura Engine. The search result buttons expose option semantics and active selection state for keyboard navigation.
+
+The handoff dialog was opened directly from the live preflight panel. It displayed the selected Aura Engine, policy summary, Approve with Warning verdict, Base → Ethereum route, a `PREFLIGHT CHECKS · 4/6 PASSING` list with audit and volatility warnings plus thresholds, and explicit simulation-boundary language stating that Sentinel does not connect a wallet, request a signature, submit a transaction, or custody funds. The dialog offered Cancel and Confirm simulated handoff actions.
+
+## Final control-contract verification — Aug 15, 2026
+
+The search keyboard handler now distinguishes all three destinations: `workspace` for Overview and agents, and `report` for Audit report; ArrowUp/ArrowDown update `aria-activedescendant`, and Enter invokes the same destination handler as click. The new Vitest contract test asserts both Workspace and Audit report targets.
+
+The notification button explicitly transitions `notificationsRead` to true before opening the panel; the panel derives its label from the shared helper and changes from `2 new` to `All read`. Profile actions use a shared safe-state helper: authenticated users see `Sign out of demo`, while guests see `Demo operator` with a `no wallet or funds affected` description. The handoff view model and open-dialog browser evidence cover the selected agent, policy, `4/6 passing` checks, warning/failure thresholds, simulated output, circuit-breaker failure condition, and the no-wallet/no-signature/no-custody boundary.
+
+The final live browser pass activated `Overview workspace` by typing `workspace` into Search and pressing Enter; the overlay closed and the viewport moved to the `#workspace` evaluation section. A second keyboard pass typed `report` and pressed Enter; the search overlay closed and the report changed to `Hide audit report` with the `Full reasoning trace` and plain-text audit report visible. Opening Notifications directly rendered `System activity · All read`, both risk events, and `4/6 checks currently passing`; the unread indicator was absent after the click.

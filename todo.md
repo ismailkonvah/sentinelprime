@@ -68,3 +68,27 @@
 - [x] Complete post-redesign browser QA across stable sessions with explicit evidence for target compile, guardrail edit, Aura active state, simulation OFF and ON, report open, copy success, and export success.
 - [x] Append QA.md with the exact final intent, policy, active agent, simulation transitions, and report actions, noting the browser runtime boundary.
 - [x] Save a fresh checkpoint after the documented final browser QA evidence.
+
+- [x] Define a live portfolio and Orion-agent data contract with freshness, source, and simulated/demo-state labeling.
+- [x] Replace static shell KPI values with dynamic portfolio and agent metrics derived from the active Sentinel data model.
+- [x] Implement functional navigation search with keyboard-accessible results and workspace/agent/report destinations.
+- [x] Implement a notifications panel with meaningful Sentinel system and risk events plus read-state behavior.
+- [x] Implement a profile control with account context and safe sign-out/action states.
+- [x] Add a simulation-only wallet handoff flow with a clear no-funds/no-signature boundary.
+- [x] Add an explicit confirmation modal showing agent, policy, checks, route, simulated output, and failure conditions before handoff.
+- [x] Add unit tests and browser QA for dynamic KPIs, search, notifications, profile, modal confirmation, and simulation-only safety.
+- [x] Save a checkpoint after all requested upgrades and verification are complete.
+
+- [x] Add explicit freshness and source metadata to live portfolio/Orion-agent data and surface it in the shell or supporting detail.
+- [x] Verify keyboard-accessible search results and destination behavior for workspace, agent, and report targets.
+- [x] Implement and verify notification unread/read-state transitions.
+- [x] Implement and verify safe profile actions, including clearly labeled demo-only sign-out behavior.
+- [x] Show checks, simulated output, and failure conditions inside the handoff confirmation modal before confirmation.
+- [x] Add focused unit tests for search, notifications, profile, simulation-handoff safety, and modal state.
+- [x] Save a new checkpoint only after these gaps and QA are complete.
+
+- [x] Verify keyboard activation for Workspace and Audit report search destinations and document both results.
+- [x] Add direct notification-panel unread-to-read UI evidence and a focused transition test.
+- [x] Add and test clearly labeled demo-only profile actions, including demo sign-out behavior.
+- [x] Add focused tests for handoff modal content and state, including checks, simulated output, and failure conditions.
+- [x] Save a fresh checkpoint after the remaining gap fixes and QA.
