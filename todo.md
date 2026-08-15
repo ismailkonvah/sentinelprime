@@ -92,3 +92,8 @@
 - [x] Add and test clearly labeled demo-only profile actions, including demo sign-out behavior.
 - [x] Add focused tests for handoff modal content and state, including checks, simulated output, and failure conditions.
 - [x] Save a fresh checkpoint after the remaining gap fixes and QA.
+
+- [ ] Prepare a GitHub repository export for the checkpointed Sentinel project.
+- [ ] Assess Vercel deployment compatibility for the Manus full-stack server, auth, and database runtime.
+- [ ] Document required Vercel environment variables and any configuration or runtime limitations.
+- [ ] Confirm the repository URL and deployment recommendation to the user.
