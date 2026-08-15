@@ -98,5 +98,5 @@
 - [x] Document required Vercel environment variables and any configuration or runtime limitations.
 - [x] Confirm the repository URL and deployment recommendation to the user.
 
-- [ ] Write a deployment note listing required Vercel environment variables, Manus-specific auth/runtime constraints, and the hosting recommendation.
-- [ ] Send the GitHub repository URL with a clear Vercel deployment recommendation and caveats.
+- [x] Write a deployment note listing required Vercel environment variables, Manus-specific auth/runtime constraints, and the hosting recommendation.
+- [x] Send the GitHub repository URL with a clear Vercel deployment recommendation and caveats.
