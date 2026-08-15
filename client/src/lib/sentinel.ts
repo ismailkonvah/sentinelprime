@@ -251,3 +251,17 @@ export function buildReport(agent: OrionAgent, policy: Policy, checks: CheckResu
   ];
   return lines.join("\n");
 }
+
+
+export type ResponsiveSurfaceState = {
+  navMode: "compact" | "sidebar";
+  kpiColumns: 2 | 4 | 5;
+  actionLayout: "stacked" | "inline";
+  minimumTouchTarget: number;
+};
+
+export function getResponsiveSurfaceState(viewportWidth: number): ResponsiveSurfaceState {
+  if (viewportWidth < 768) return { navMode: "compact", kpiColumns: 2, actionLayout: "stacked", minimumTouchTarget: 44 };
+  if (viewportWidth < 1024) return { navMode: "compact", kpiColumns: 4, actionLayout: "inline", minimumTouchTarget: 44 };
+  return { navMode: "sidebar", kpiColumns: 5, actionLayout: "inline", minimumTouchTarget: 44 };
+}

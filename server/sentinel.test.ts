@@ -159,3 +159,13 @@ describe("notification transition", () => {
     expect(read).toMatchObject({ unread: false, label: "All read", summary: "4/6 checks currently passing." });
   });
 });
+
+
+describe("Sentinel responsive surface contract", () => {
+  it("uses compact stacked controls on mobile and sidebar inline controls on desktop", async () => {
+    const { getResponsiveSurfaceState } = await import("../client/src/lib/sentinel");
+    expect(getResponsiveSurfaceState(375)).toMatchObject({ navMode: "compact", kpiColumns: 2, actionLayout: "stacked", minimumTouchTarget: 44 });
+    expect(getResponsiveSurfaceState(900)).toMatchObject({ navMode: "compact", kpiColumns: 4, actionLayout: "inline", minimumTouchTarget: 44 });
+    expect(getResponsiveSurfaceState(1280)).toMatchObject({ navMode: "sidebar", kpiColumns: 5, actionLayout: "inline", minimumTouchTarget: 44 });
+  });
+});

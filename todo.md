@@ -100,3 +100,13 @@
 
 - [x] Write a deployment note listing required Vercel environment variables, Manus-specific auth/runtime constraints, and the hosting recommendation.
 - [x] Send the GitHub repository URL with a clear Vercel deployment recommendation and caveats.
+
+- [x] Add responsive support for the Sentinel shell, navigation, KPI strip, workspace panels, agent cards, and report surfaces across mobile and desktop breakpoints.
+- [x] Make search, notifications, profile, wallet handoff, and audit modal interactions usable at touch and keyboard sizes.
+- [x] Verify mobile and desktop screenshots, overflow, focus states, and key interaction flows.
+- [x] Add focused responsive interaction tests and update QA documentation.
+- [x] Save a new responsive-support checkpoint.
+
+- [x] Re-run responsive browser QA at mobile and desktop sizes for search, notifications, profile, workspace navigation, handoff, and audit report flows, including focus-state checks.
+- [x] Add focused responsive contract tests rather than relying only on the existing business-logic suite.
+- [x] Save a fresh checkpoint after responsive QA and responsive contract coverage.
